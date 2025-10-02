@@ -72,6 +72,8 @@ export default function EditEditionPage() {
         hero_image_url: imageUrl, // Use imageUrl state for hero_image_url
         featured,
         slug: title.toLowerCase().replace(/ /g, "-"),
+        description: "",
+        image_url: "",
       };
       await updateEdition(edition.id, updatedEdition);
       router.push("/admin/editions");
