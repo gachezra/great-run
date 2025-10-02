@@ -1,6 +1,6 @@
-import { getBlogPosts, getEditions } from '@/lib/firestore';
+import { getBlogPosts, getEditions } from "@/lib/firestore";
 
-const URL = 'https://your-website-url.com';
+const URL = "https://www.thegreat.run";
 
 export default async function sitemap() {
   const [editions, blogPosts] = await Promise.all([
