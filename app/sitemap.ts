@@ -1,6 +1,6 @@
-import { getBlogPosts, getEditions } from '@/lib/firestore';
+import { getBlogPosts, getEditions } from "@/lib/supabase-crud";
 
-const URL = 'https://your-website-url.com';
+const URL = "https://your-website-url.com";
 
 export default async function sitemap() {
   const [editions, blogPosts] = await Promise.all([
