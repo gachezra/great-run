@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { getSponsors, deleteSponsor } from '@/lib/firestore';
+import { getSponsors, deleteSponsor } from '@/lib/supabase-crud';
 import { Sponsor } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

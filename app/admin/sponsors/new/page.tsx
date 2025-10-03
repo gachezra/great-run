@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { addSponsor } from '@/lib/firestore';
+import { addSponsor } from '@/lib/supabase-crud';
 import { uploadImage } from '@/lib/cloudinary';
 import { Sponsor } from '@/types';
 import { Button } from '@/components/ui/button';

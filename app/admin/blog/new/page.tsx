@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { addBlogPost } from '@/lib/firestore';
+import { addBlogPost } from '@/lib/supabase-crud';
 import { uploadImage } from '@/lib/cloudinary';
 import { BlogPost } from '@/types';
 import { Button } from '@/components/ui/button';
