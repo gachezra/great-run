@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { getSponsor, updateSponsor } from '@/lib/firestore';
+import { getSponsor, updateSponsor } from '@/lib/supabase-crud';
 import { uploadImage } from '@/lib/cloudinary';
 import { Sponsor } from '@/types';
 import { Button } from '@/components/ui/button';
@@ -53,7 +53,7 @@ export default function EditSponsorPage() {
     if (!sponsor) return;
 
     try {
-      const updatedSponsor: Omit<Sponsor, 'id'> = {
+      const updatedSponsor: Partial<Omit<Sponsor, 'id'>> = {
         name,
         website,
         logo_url: logoUrl,

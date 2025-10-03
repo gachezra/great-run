@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { addEdition } from '@/lib/firestore';
+import { addEdition } from '@/lib/supabase-crud';
 import { uploadImage } from '@/lib/cloudinary';
 import { Edition } from '@/types';
 import { Button } from '@/components/ui/button';
@@ -15,18 +15,24 @@ export default function NewEditionPage() {
   const [date, setDate] = useState('');
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
+  const [summary, setSummary] = useState('');
   const [distanceKm, setDistanceKm] = useState(0);
   const [imageUrl, setImageUrl] = useState('');
+  const [heroImageUrl, setHeroImageUrl] = useState('');
   const [featured, setFeatured] = useState(false);
   const [uploading, setUploading] = useState(false);
   const router = useRouter();
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, isHero: boolean) => {
     if (e.target.files && e.target.files[0]) {
       setUploading(true);
       try {
         const url = await uploadImage(e.target.files[0]);
-        setImageUrl(url);
+        if (isHero) {
+          setHeroImageUrl(url);
+        } else {
+          setImageUrl(url);
+        }
       } catch (error) {
         console.error('Failed to upload image:', error);
       } finally {
@@ -43,8 +49,10 @@ export default function NewEditionPage() {
         date,
         location,
         description,
+        summary,
         distance_km: distanceKm,
         image_url: imageUrl,
+        hero_image_url: heroImageUrl,
         featured,
         slug: title.toLowerCase().replace(/ /g, '-'),
       };
@@ -87,6 +95,13 @@ export default function NewEditionPage() {
           className="bg-gray-700 border-gray-600 rounded-lg text-white placeholder:text-gray-400"
           required
         />
+        <Textarea
+          placeholder="Summary"
+          value={summary}
+          onChange={(e) => setSummary(e.target.value)}
+          className="bg-gray-700 border-gray-600 rounded-lg text-white placeholder:text-gray-400"
+          required
+        />
         <Input
           type="number"
           placeholder="Distance (km)"
@@ -95,14 +110,28 @@ export default function NewEditionPage() {
           className="bg-gray-700 border-gray-600 rounded-lg text-white placeholder:text-gray-400"
           required
         />
-        <Input
-          type="file"
-          onChange={handleImageUpload}
-          accept="image/*"
-          className="bg-gray-700 border-gray-600 rounded-lg text-white"
-        />
-        {uploading && <p className="text-gray-400">Uploading...</p>}
-        {imageUrl && <img src={imageUrl} alt="Uploaded image" className="max-w-xs rounded-lg" />}
+        <div className="text-white">
+          <label>Card Image</label>
+          <Input
+            type="file"
+            onChange={(e) => handleImageUpload(e, false)}
+            accept="image/*"
+            className="bg-gray-700 border-gray-600 rounded-lg text-white mt-2"
+          />
+          {uploading && <p className="text-gray-400">Uploading...</p>}
+          {imageUrl && <img src={imageUrl} alt="Uploaded image" className="max-w-xs rounded-lg mt-2" />}
+        </div>
+        <div className="text-white">
+          <label>Hero Image</label>
+          <Input
+            type="file"
+            onChange={(e) => handleImageUpload(e, true)}
+            accept="image/*"
+            className="bg-gray-700 border-gray-600 rounded-lg text-white mt-2"
+          />
+          {uploading && <p className="text-gray-400">Uploading...</p>}
+          {heroImageUrl && <img src={heroImageUrl} alt="Uploaded image" className="max-w-xs rounded-lg mt-2" />}
+        </div>
         <div className="flex items-center space-x-2 text-white">
           <Checkbox id="featured" checked={featured} onCheckedChange={(checked) => setFeatured(Boolean(checked))} />
           <label htmlFor="featured">Featured</label>

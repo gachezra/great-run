@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getEditions, addGallery } from '@/lib/firestore';
+import { getEditions, addGallery } from '@/lib/supabase-crud';
 import { uploadImage } from '@/lib/cloudinary';
 import { Edition, Gallery } from '@/types';
 import { Button } from '@/components/ui/button';

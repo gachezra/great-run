@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { getEditions, deleteEdition } from '@/lib/firestore';
+import { getEditions, deleteEdition } from '@/lib/supabase-crud';
 import { Edition } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

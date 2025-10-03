@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { getBlogPosts, deleteBlogPost } from '@/lib/firestore';
+import { getBlogPosts, deleteBlogPost } from '@/lib/supabase-crud';
 import { BlogPost } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

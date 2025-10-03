@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { getGalleries, deleteGallery } from '@/lib/firestore';
+import { getGalleries, deleteGallery } from '@/lib/supabase-crud';
 import { Gallery } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

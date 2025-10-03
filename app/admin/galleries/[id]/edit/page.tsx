@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { getEditions, getGallery, updateGallery } from '@/lib/firestore';
+import { getEditions, getGallery, updateGallery } from '@/lib/supabase-crud';
 import { uploadImage } from '@/lib/cloudinary';
 import { Edition, Gallery } from '@/types';
 import { Button } from '@/components/ui/button';
@@ -74,7 +74,7 @@ export default function EditGalleryPage() {
     if (!gallery) return;
 
     try {
-      const updatedGallery: Omit<Gallery, 'id'> = {
+      const updatedGallery: Partial<Omit<Gallery, 'id'>> = {
         title,
         edition_id: editionId,
         images,
